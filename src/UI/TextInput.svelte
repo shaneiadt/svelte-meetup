@@ -1,5 +1,5 @@
 <script>
-  export let id, label, rows, controlType, type, value;
+  export let id, label, rows = null, controlType = null, type = 'text', value;
 </script>
 
 <style>
