@@ -62,6 +62,11 @@ const customMeetupsStore = {
             updatedMeetups[meetupIndex] = updatedMeetup
             return updatedMeetups
         })
+    },
+    deleteMeetup: id => {
+        meetups.update(items => {
+            return items.filter(item => item.id !== id)
+        })
     }
 }
 
