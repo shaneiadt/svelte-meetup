@@ -29,6 +29,7 @@
       imageUrl={meetup.imageUrl}
       address={meetup.address}
       contact={meetup.contact}
-      isFav={meetup.isFavorite} />
+      isFav={meetup.isFavorite}
+      on:showdetails />
   {/each}
 </section>
