@@ -5,28 +5,10 @@
   import Button from "./UI/Button.svelte";
   import EditMeetup from "./Meetups/EditMeetup.svelte";
 
-  // let meetups = ;
-
   let editMode = undefined;
 
-  function addMeetup({ detail }) {
-    const { title, subtitle, description, imageUrl, contact, address } = detail;
-    const meetupData = {
-      title,
-      subtitle,
-      description,
-      imageUrl,
-      contact,
-      address
-    };
-    // meetups = [newMeetup, ...meetups];
-    meetups.addMeetup(meetupData);
+  function addMeetup() {
     editMode = null;
-  }
-
-  function toggleFavorite(event) {
-    const id = event.detail;
-    meetups.toggleFavorite(id);
   }
 
   function cancelEdit() {
@@ -52,5 +34,5 @@
   {#if editMode === 'add'}
     <EditMeetup on:save={addMeetup} on:cancel={cancelEdit} />
   {/if}
-  <MeetupGrid meetups={$meetups} on:togglefavorite={toggleFavorite} />
+  <MeetupGrid meetups={$meetups} />
 </main>
