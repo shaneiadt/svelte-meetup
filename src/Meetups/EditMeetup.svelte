@@ -98,8 +98,17 @@
   }
 
   function deleteMeetup() {
-    meetups.deleteMeetup(id);
-    dispatch("save");
+    fetch(`https://svelte-course-d7811.firebaseio.com/meetups/${id}.json`, {
+      method: "DELETE"
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("An error ocurred");
+        }
+        meetups.deleteMeetup(id);
+        dispatch("save");
+      })
+      .catch(err => console.error(err));
   }
 </script>
 
