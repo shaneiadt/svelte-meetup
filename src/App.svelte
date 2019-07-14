@@ -5,13 +5,15 @@
   import Button from "./UI/Button.svelte";
   import EditMeetup from "./Meetups/EditMeetup.svelte";
   import MeetupDetail from "./Meetups/MeetupDetail.svelte";
-  import LoadingSpinner from './UI/LoadingSpinner.svelte'
+  import LoadingSpinner from "./UI/LoadingSpinner.svelte";
+  import Error from "./UI/Error.svelte";
 
   let editMode = undefined;
   let page = "overview";
   let pageData = {};
   let editedId;
   let isLoading = true;
+  let error;
 
   fetch("https://svelte-course-d7811.firebaseio.com/meetups.json")
     .then(res => {
@@ -31,7 +33,10 @@
       meetups.setMeetups(loadedMeetups.reverse());
       isLoading = false;
     })
-    .catch(err => console.error("Something went wrong fetching the data."));
+    .catch(err => {
+      error = err;
+      console.error("Something went wrong fetching the data.");
+    });
 
   function saveMeetup() {
     editMode = null;
@@ -57,6 +62,10 @@
     editMode = "edit";
     editedId = event.detail;
   }
+
+  function clearError() {
+    error = null;
+  }
 </script>
 
 <style>
@@ -64,6 +73,10 @@
     margin-top: 5rem;
   }
 </style>
+
+{#if error}
+  <Error message={error.message} on:cancel={clearError} />
+{/if}
 
 <Header />
 
