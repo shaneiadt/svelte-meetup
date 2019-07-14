@@ -53,7 +53,20 @@
       address
     };
     if (id) {
-      meetups.updateMeetup(id, meetupData);
+      fetch(`https://svelte-course-d7811.firebaseio.com/meetups/${id}.json`, {
+        method: "PATCH",
+        body: JSON.stringify(meetupData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error("An error ocurred");
+          }
+          meetups.updateMeetup(id, meetupData);
+        })
+        .catch(err => console.error(err));
     } else {
       fetch("https://svelte-course-d7811.firebaseio.com/meetups.json", {
         method: "POST",
