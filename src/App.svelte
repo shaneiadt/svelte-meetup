@@ -28,7 +28,7 @@
           id: key
         });
       }
-      meetups.setMeetups(loadedMeetups);
+      meetups.setMeetups(loadedMeetups.reverse());
       isLoading = false;
     })
     .catch(err => console.error("Something went wrong fetching the data."));

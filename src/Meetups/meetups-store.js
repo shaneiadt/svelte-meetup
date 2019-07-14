@@ -13,8 +13,8 @@ const customMeetupsStore = {
         }
         meetups.update(items => {
             return [
-                ...items,
-                newMeetup
+                newMeetup,
+                ...items
             ]
         })
     },
