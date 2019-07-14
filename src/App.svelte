@@ -11,6 +11,25 @@
   let pageData = {};
   let editedId;
 
+  fetch("https://svelte-course-d7811.firebaseio.com/meetups.json")
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("An error occurred fetching.");
+      }
+      return res.json();
+    })
+    .then(data => {
+      const loadedMeetups = [];
+      for (const key in data) {
+        loadedMeetups.push({
+          ...data[key],
+          id: key
+        });
+      }
+      meetups.setMeetups(loadedMeetups);
+    })
+    .catch(err => console.error("Something went wrong fetching the data."));
+
   function saveMeetup() {
     editMode = null;
     editedId = null;
